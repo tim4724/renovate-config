@@ -3,7 +3,7 @@
   "description": "Shared Renovate config for the Paper Balloon game and site repos. Repos use it with: \"extends\": [\"github>tim4724/renovate-config\"]",
   "extends": ["config:best-practices"],
   "timezone": "Europe/Berlin",
-  "schedule": ["* 7-16 * * 1"],
+  "schedule": ["* * * * 1"],
   "minimumReleaseAge": "3 days",
   "minimumReleaseAgeBehaviour": "timestamp-optional",
   "platformAutomerge": false,
