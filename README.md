@@ -1,0 +1,13 @@
+# renovate-config
+
+Shared [Renovate](https://docs.renovatebot.com/) preset for the Paper Balloon
+repos. A repo opts in with `.github/renovate.json`:
+
+```json
+{ "extends": ["github>tim4724/renovate-config"] }
+```
+
+Each rule's `description` in `default.json` says why it exists. Dependabot
+alerts stay on in every repo: Renovate reads them for its security PRs, which
+skip the schedule and the release-age wait. Dependabot security updates stay
+off, or every fix arrives twice.

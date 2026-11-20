@@ -1,0 +1,69 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Shared Renovate config for the Paper Balloon game and site repos. Repos use it with: \"extends\": [\"github>tim4724/renovate-config\"]",
+  "extends": ["config:best-practices"],
+  "timezone": "Europe/Berlin",
+  "schedule": ["* 7-16 * * 1"],
+  "minimumReleaseAge": "3 days",
+  "minimumReleaseAgeBehaviour": "timestamp-optional",
+  "platformAutomerge": false,
+  "lockFileMaintenance": {
+    "schedule": ["* 7-16 * * 1"],
+    "automerge": true
+  },
+  "packageRules": [
+    {
+      "description": "Our own images are deployed by tag or rollout restart. A pinned digest would freeze :latest.",
+      "matchPackageNames": ["ghcr.io/tim4724/**"],
+      "enabled": false
+    },
+    {
+      "description": "One weekly PR for everything below a major. Renovate merges it only when every check on the branch passed, and never when there are no checks.",
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
+      "groupName": "non-major dependencies",
+      "groupSlug": "non-major",
+      "automerge": true
+    },
+    {
+      "description": "Android on its own, so a broken Android build doesn't hold back the web and server updates.",
+      "matchManagers": ["gradle", "gradle-wrapper"],
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
+      "groupName": "Android dependencies",
+      "groupSlug": "android"
+    },
+    {
+      "description": "Actions run beside deploy credentials on the self-hosted runners: grouped, merged by hand.",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "groupSlug": "github-actions",
+      "automerge": false
+    },
+    {
+      "description": "Manifests are applied by hand with kubectl, so a merge alone changes nothing in the cluster.",
+      "matchManagers": ["kubernetes"],
+      "groupName": "Kubernetes manifests",
+      "groupSlug": "kubernetes",
+      "automerge": false
+    },
+    {
+      "description": "The Playwright test container has to match @playwright/test exactly.",
+      "matchPackageNames": ["@playwright/test", "mcr.microsoft.com/playwright"],
+      "groupName": "Playwright",
+      "groupSlug": "playwright",
+      "automerge": true
+    },
+    {
+      "description": "A Node.js major moves the Dockerfiles, .nvmrc and setup-node together.",
+      "matchDatasources": ["docker", "node-version"],
+      "matchPackageNames": ["/(?:^|/)node$/"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "Node.js",
+      "groupSlug": "nodejs"
+    },
+    {
+      "description": "Odd nginx minors are mainline; stay on the stable (even) line.",
+      "matchPackageNames": ["nginx/nginx-unprivileged"],
+      "allowedVersions": "/^1\\.\\d*[02468]-alpine$/"
+    }
+  ]
+}
