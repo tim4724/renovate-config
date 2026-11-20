@@ -25,11 +25,11 @@
       "automerge": true
     },
     {
-      "description": "Android on its own, so a broken Android build doesn't hold back the web and server updates.",
-      "matchManagers": ["gradle", "gradle-wrapper"],
+      "description": "The Android and Apple apps on their own, so a broken native build doesn't hold back the web and server updates.",
+      "matchManagers": ["gradle", "gradle-wrapper", "xcodegen", "swift"],
       "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
-      "groupName": "Android dependencies",
-      "groupSlug": "android"
+      "groupName": "native app dependencies",
+      "groupSlug": "native"
     },
     {
       "description": "Actions run beside deploy credentials on the self-hosted runners: grouped, merged by hand.",
