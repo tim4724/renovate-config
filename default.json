@@ -8,7 +8,7 @@
   "minimumReleaseAgeBehaviour": "timestamp-optional",
   "platformAutomerge": false,
   "lockFileMaintenance": {
-    "schedule": ["* 7-16 * * 1"],
+    "schedule": ["* * * * 1"],
     "automerge": true
   },
   "packageRules": [
