@@ -61,6 +61,12 @@
       "groupSlug": "nodejs"
     },
     {
+      "description": "CI's kubectl stays on the cluster's minor; bump that by hand with each cluster upgrade.",
+      "matchDepNames": ["kubectl"],
+      "matchUpdateTypes": ["major", "minor"],
+      "enabled": false
+    },
+    {
       "description": "Odd nginx minors are mainline; stay on the stable (even) line.",
       "matchPackageNames": ["nginx/nginx-unprivileged"],
       "allowedVersions": "/^1\\.\\d*[02468]-alpine$/"
