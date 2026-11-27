@@ -70,6 +70,24 @@
       "description": "Odd nginx minors are mainline; stay on the stable (even) line.",
       "matchPackageNames": ["nginx/nginx-unprivileged"],
       "allowedVersions": "/^1\\.\\d*[02468]-alpine$/"
+    },
+    {
+      "description": "Maven Central rate-limits Mend's shared servers, and one failed lookup holds back every grouped PR in the repo. Look Maven packages up on Google's mirror of Central instead. This list replaces the repositories the build declares, which are google() and mavenCentral() in every repo here.",
+      "matchDatasources": ["maven"],
+      "registryUrls": [
+        "https://maven-central.storage-download.googleapis.com/maven2/",
+        "https://dl.google.com/android/maven2/"
+      ]
+    },
+    {
+      "description": "Plugins also resolve from gradlePluginPortal().",
+      "matchDatasources": ["maven"],
+      "matchDepTypes": ["plugin"],
+      "registryUrls": [
+        "https://maven-central.storage-download.googleapis.com/maven2/",
+        "https://dl.google.com/android/maven2/",
+        "https://plugins.gradle.org/m2/"
+      ]
     }
   ]
 }
